@@ -1,3 +1,3 @@
-# Boulodey
+# Boulotdey
 
-- An "only-for-francophones" site for job applications in cameroon!
+- A job site for cameroonians!
