@@ -1,3 +1,10 @@
+
+* {
+  text-decoration: none;
+  border: none;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -43,11 +50,11 @@
   /* accent */
 
   --accent-900: #2d1010;
-  --accent-800: #5A2020;
+  --accent-800: #5a2020;
   --accent-700: #863131;
-  --accent-600: #B34141;
-  --accent-500: #E05151;
-  --accent-400: #E05151;
+  --accent-600: #b34141;
+  --accent-500: #e05151;
+  --accent-400: #e05151;
   --accent-300: #eb8080;
   --accent-200: #efa0a0;
   --accent-100: #f4bfbf;
@@ -65,9 +72,9 @@
   --neutral-200: #cccccc;
   --neutral-100: #e0e0e0;
   --neutral-50: #f5f5f5;
-  
+
   /* tetiary */
-  
+
   --tertiary-900: #0d47a1;
   --tertiary-800: #1565c0;
   --tertiary-700: #1976d2;
@@ -78,15 +85,6 @@
   --tertiary-200: #90caf9;
   --tertiary-100: #bbdefb;
   --tertiary-50: #e3f2fd;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -119,17 +117,4 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
