@@ -1,3 +1,3 @@
 export default function NavbarTwo() {
-  return <>Nav tone</>;
+  return <div className="">Nav tone</div>;
 }
