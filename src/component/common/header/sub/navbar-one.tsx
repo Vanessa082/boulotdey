@@ -1,5 +1,3 @@
 export default function NavbarOne() {
-  return(
-    <>nav otne</>
-  )
+  return <>nav otne</>;
 }

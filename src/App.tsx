@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import AppWrapper from "./component/common/app-wrapper"
-import LandingPage from "./pages/landing-page/landing-page"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AppWrapper from "./component/common/app-wrapper";
+import LandingPage from "./pages/landing-page/landing-page";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

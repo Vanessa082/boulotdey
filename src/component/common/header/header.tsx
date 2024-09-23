@@ -13,5 +13,5 @@ export default function Header() {
 
       {excludedPaths.includes(pathname) ? null : <NavbarTwo />}
     </>
-  )
+  );
 }
