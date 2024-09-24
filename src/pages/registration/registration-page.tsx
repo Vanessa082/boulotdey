@@ -1,7 +1,3 @@
 export default function Registration() {
-  return(
-    <>
-    rer
-    </>
-  )
+  return <>rer</>;
 }
