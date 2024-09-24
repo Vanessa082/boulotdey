@@ -7,7 +7,7 @@ export default function Header() {
   const { pathname } = useLocation();
 
   return (
-    <div className="w-full flex flex-col bg-gray-50">
+    <div className="w-full flex flex-col bg-app-gray-0">
       <NavbarOne />
 
       {excludedPaths.includes(pathname) ? null : <NavbarTwo />}
