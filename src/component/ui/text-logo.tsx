@@ -2,18 +2,25 @@ import type { ComponentProps } from "react";
 
 interface TextLogoProps extends ComponentProps<"h1"> {
   text?: string;
-};
+}
 
-export function TextLogo({ className, text = "Boulotdey", ...restProps }: TextLogoProps) {
+export function TextLogo({
+  className,
+  text = "Boulotdey",
+  ...restProps
+}: TextLogoProps) {
   return (
     <h1
       {...restProps}
-      className={"w-fit flex items-center justify-center flex-nowrap gap-2 text-xl font-bold text-background-color cursor-pointer " + (className || "")}
+      className={
+        "w-fit flex items-center justify-center flex-nowrap gap-2 text-xl font-bold text-background-color cursor-pointer " +
+        (className || "")
+      }
     >
       <img src="/logo.svg" alt="App logo" width={32} height={41} />
       <span>{text}</span>
     </h1>
-  )
+  );
 }
 
 // class Animal {
@@ -40,4 +47,3 @@ export function TextLogo({ className, text = "Boulotdey", ...restProps }: TextLo
 // const { name } = myAnimal;
 
 // const { } = myBird;
-
