@@ -1,5 +1,6 @@
 import { TextLogo } from "../../component/ui/text-logo";
 import backgroundImage from "../../../public/assets/bgl.jpg";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -15,9 +16,9 @@ export default function Login() {
           <h2 className="text-3xl font-bold mb-6">Sign in</h2>
           <p className="mb-4">
             Don't have an account?{" "}
-            <a href="#" className="text-primary hover:underline">
+            <Link to="/register" className="text-primary hover:underline">
               Create Account
-            </a>
+            </Link>
           </p>
 
           <form>
