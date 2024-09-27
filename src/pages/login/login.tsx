@@ -1,48 +1,46 @@
 import { TextLogo } from "../../component/ui/text-logo";
-import backgroundImage from "../../../public/assets/bgl.jpg";
+import backgroundImage from "../../assets/bgl.jpg";
 import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
     <div className="min-h-screen flex">
-      {/* Left Side: Sign In Form */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center px-8 py-12 bg-white">
+      <div className="w-full md:w-1/2 flex flex-col justify-center px-8 py-12 bg-app-gray-0">
         <div className="max-w-md mx-auto">
-          {/* Logo */}
           <div className="flex justify-center mb-8">
             <TextLogo className="text-app-gray-900" />
           </div>
 
-          <h2 className="text-3xl font-bold mb-6">Sign in</h2>
-          <p className="mb-4">
+          <h2 className="text-4xl font-semibold mb-6">Welcome Back!</h2>
+          <p className="mb-4 text-app-gray-600">
             Don't have an account?{" "}
             <Link to="/register" className="text-primary hover:underline">
-              Create Account
+              Create one today
             </Link>
           </p>
 
           <form>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium">
-                Email address
+            <div className="mb-6">
+              <label htmlFor="email" className="block text-sm font-semibold">
+                Email Address
               </label>
               <input
                 type="email"
                 id="email"
-                className="input input-bordered w-full"
-                placeholder="Email address"
+                className="input input-bordered w-full px-4 py-2 border border-app-gray-300 rounded-lg focus:outline-none focus:border-primary"
+                placeholder="Enter your email"
               />
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium">
+            <div className="mb-6">
+              <label htmlFor="password" className="block text-sm font-semibold">
                 Password
               </label>
               <input
                 type="password"
                 id="password"
-                className="input input-bordered w-full"
-                placeholder="Password"
+                className="input input-bordered w-full px-4 py-2 border border-app-gray-300 rounded-lg focus:outline-none focus:border-primary"
+                placeholder="Enter your password"
               />
             </div>
 
@@ -52,21 +50,21 @@ export default function Login() {
                   type="checkbox"
                   className="checkbox checkbox-primary mr-2"
                 />
-                Remember me
+                <span className="text-sm">Remember me</span>
               </label>
-              <a href="#" className="text-primary hover:underline">
+              <a href="#" className="text-primary hover:underline text-sm">
                 Forgot password?
               </a>
             </div>
 
-            <button className="btn btn-primary w-full mb-4">Sign in</button>
+            <button className="btn btn-primary w-full py-3 text-app-gray-0 text-lg rounded-lg shadow-lg hover:bg-primary-dark transition">
+              Sign in
+            </button>
           </form>
         </div>
       </div>
 
-      {/* Right Side: Background Image with Overlay */}
       <div className="hidden md:flex w-1/2 relative">
-        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -74,27 +72,25 @@ export default function Login() {
           }}
         ></div>
 
-        {/* Overlay */}
         <div className="absolute inset-0 bg-app-green-900 bg-opacity-50"></div>
 
-        {/* Content on top of the overlay */}
-        <div className="relative z-10 text-white flex flex-col justify-center items-center w-full">
+        <div className="relative z-10 text-app-gray-0 flex flex-col justify-center items-center w-full">
           <div className="text-center max-w-lg">
-            <h2 className="text-4xl font-bold mb-4">
-              Over 1,75,324 candidates waiting for good employees.
+            <h2 className="text-5xl font-bold mb-4">
+              Over 175,324 candidates waiting for you!
             </h2>
             <div className="flex justify-around mt-8">
               <div className="text-center">
-                <span className="text-3xl font-bold">1,75,324</span>
-                <p className="text-sm">Live Jobs</p>
+                <span className="text-4xl font-bold">175,324</span>
+                <p className="text-lg">Live Jobs</p>
               </div>
               <div className="text-center">
-                <span className="text-3xl font-bold">87,354</span>
-                <p className="text-sm">Companies</p>
+                <span className="text-4xl font-bold">87,354</span>
+                <p className="text-lg">Companies</p>
               </div>
               <div className="text-center">
-                <span className="text-3xl font-bold">7,532</span>
-                <p className="text-sm">New Jobs</p>
+                <span className="text-4xl font-bold">7,532</span>
+                <p className="text-lg">New Jobs</p>
               </div>
             </div>
           </div>
