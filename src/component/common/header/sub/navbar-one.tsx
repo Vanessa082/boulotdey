@@ -1,4 +1,5 @@
-import { FaPhoneAlt } from "react-icons/fa";
+import { useState } from "react";
+import { FaPhoneAlt, FaBars } from "react-icons/fa"; // Importing icons
 
 interface NavItem {
   text: string;
@@ -6,44 +7,65 @@ interface NavItem {
 }
 
 const NavItems: NavItem[] = [
-  {
-    text: "Home",
-    href: "/",
-  },
-  {
-    text: "Testimonial",
-    href: "/",
-  },
-  {
-    text: "Find Job",
-    href: "/",
-  },
+  { text: "Home", href: "/" },
+  { text: "Testimonial", href: "/" },
+  { text: "Find Job", href: "/" },
 ];
 
 export default function NavbarOne() {
+  const [isOpen, setIsOpen] = useState(false); 
+
   return (
-    <div className="flex  w-full py-2 justify-center gap-96 bg-app-gray-50">
-      <nav className="flex mx-auto w-primary-app-width justify-between items-center">
-        <ul className="flex gap-6 justify-between items-center text-gray-600   cursor-pointer">
+    <div className="w-full py-3 bg-app-gray-50 relative"> 
+      <nav className="flex max-w-7xl mx-auto px-4 justify-between items-center">
+        <ul className="hidden sm:flex gap-6 text-gray-600 items-center">
           {NavItems.map(({ text, href }) => (
             <li
               className="relative hover:text-app-green-500 hover:before:content-[''] hover:before:absolute hover:before:-bottom-1 hover:before:left-0 hover:before:w-full hover:before:h-0.5 hover:before:bg-app-green-500"
               key={text}
             >
-              <a href={href}>{text}</a>
+              <a href={href} className="text-base font-medium">
+                {text}
+              </a>
             </li>
           ))}
         </ul>
 
-        <h4>
-          <a
-            href="tel:+237671492013"
-            className="flex justify-between gap-2 items-center text-gray-900  hover:text-app-green-500 cursor-pointer"
-          >
-            <FaPhoneAlt /> (237) 671-492-013
+        <div className="flex items-center text-gray-900 hover:text-app-green-500">
+          <FaPhoneAlt />
+          <a href="tel:+237671492013" className="ml-2 font-medium">
+            (237) 671-492-013
           </a>
-        </h4>
+        </div>
+
+        <div className="sm:hidden flex items-center">
+          <button
+            className="text-gray-600 focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)} 
+          >
+            <FaBars className="w-6 h-6" /> 
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Dropdown - Positioned absolutely */}
+      {isOpen && (
+        <div className="absolute left-0 right-0 mt-2  shadow-lg z-10">
+          <ul className="flex flex-col items-center gap-4 p-4">
+            {NavItems.map(({ text, href }) => (
+              <li key={text}>
+                <a
+                  href={href}
+                  className="text-gray-900 hover:text-app-green-500"
+                  onClick={() => setIsOpen(false)} 
+                >
+                  {text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
