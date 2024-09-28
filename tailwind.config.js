@@ -23,6 +23,10 @@ export default {
     ],
   },
   theme: {
+    backgroundImage: {
+      "hero-banner": "linear-gradient(0deg, #00000069, #00000069), url('/assets/landing-page/bg.png')",
+      "simple-dark": "linear-gradient(0deg, #00000069, #00000069)",
+    },
     extend: {
       colors: {
         app: {

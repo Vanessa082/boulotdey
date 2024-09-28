@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { TextLogo } from "../../component/ui/text-logo";
-import backgroundImage from "../../assets/bgl.jpg";
+import { TextLogo } from "../../../component/ui/text-logo";
+import backgroundImage from "/assets/bgl.jpg";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../../../providers/context/app-context/app-context";
 
-export default function Registration() {
+export default function CreateAccountPage() {
   const [role, setRole] = useState("employee"); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {} = useAppContext()
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-app-gray-50">
@@ -25,7 +27,7 @@ export default function Registration() {
           </p>
 
           <div className="mb-6">
-            <label className="mr-4 font-medium">Register as:</label>
+            <label className="mr-4 font-medium">Create Account as:</label>
             <div className="flex space-x-4">
               <label className="flex items-center cursor-pointer">
                 <input
