@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppWrapper from "./component/common/app-wrapper";
 import LandingPage from "./pages/landing/landing";
-import Registration from "./pages/registration/registration-page";
-import Login from "./pages/login/login";
+import CreateAccountPage from "./pages/auth/create-account/create-account-page";
+import Login from "./pages/auth/login/login";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route element={<AppWrapper />}>
           <Route index element={<LandingPage />} />
-          <Route path="/register" element={<Registration />} />
+          <Route path="/create-account" element={<CreateAccountPage />} />
           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>

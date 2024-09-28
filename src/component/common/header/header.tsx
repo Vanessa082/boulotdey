@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { NavbarOne, NavbarTwo } from "./sub";
 
-const excludedPaths = ["/login", "/register"];
+const excludedPaths = ["/login", "/create-account"];
 
 export default function Header() {
   const { pathname } = useLocation();
