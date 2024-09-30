@@ -20,7 +20,7 @@ export default function CreateAccountPage() {
     e.preventDefault();
 
     createAccount(user)
-      .then(({ data, message, status }) => {
+      .then(({ data }) => {
         localStorage.save("token", data);
         toast.success("Registration was successful ...");
         navigate("/job-board")
