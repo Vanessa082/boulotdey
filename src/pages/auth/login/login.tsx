@@ -22,7 +22,7 @@ export default function Login() {
     }
 
     loginWithEmail(email, password)
-      .then(({ data, message, status }) => {
+      .then(({ data }) => {
         localStorage.save("token", data);
         toast.success("Successful login redirecting ...");
         navigate("/job-board")
