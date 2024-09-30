@@ -5,10 +5,13 @@ import { API_BASE_URL } from "../config/env.ts";
 
 const storage = new CLIENT_STORAGE("local");
 
-console.log({ API_BASE_URL })
-
 const HttpClient = HttpClientProvider({
   api_base_url: API_BASE_URL,
+  api_base_headers: {
+    "Content-Type": "application/json",
+    "x-author": "wah vanessa",
+    "x-author-url": "https://github.com/vanessa082",
+  },
   base_before_req_headers() {
     return {
       "Authorization": `Bearer ${storage.get("token", { fallback: ""})}`

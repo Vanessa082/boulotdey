@@ -24,13 +24,14 @@ export default {
   },
   theme: {
     backgroundImage: {
-      "hero-banner": "linear-gradient(0deg, #00000069, #00000069), url('/assets/landing-page/bg.png')",
+      "hero-banner": "linear-gradient(0deg, #0000004D, #0000004D), url('/assets/landing-page/bg.png')",
       "simple-dark": "linear-gradient(0deg, #00000069, #00000069)",
     },
     extend: {
       colors: {
         app: {
           green: {
+            50: "#E7F6EA",
             200: "#9dd9ab",
             300: "#6dc680",
             500: "#007B5E",

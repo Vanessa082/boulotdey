@@ -2,13 +2,11 @@ import { useState } from "react";
 import { TextLogo } from "../../../component/ui/text-logo";
 import backgroundImage from "/assets/bgl.jpg";
 import { Link } from "react-router-dom";
-import { useAppContext } from "../../../providers/context/app-context/app-context";
 
 export default function CreateAccountPage() {
   const [role, setRole] = useState("employee"); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {} = useAppContext()
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-app-gray-50">

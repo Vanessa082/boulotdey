@@ -1,8 +1,34 @@
+import { useState, type FormEvent } from "react";
+
 import { TextLogo } from "../../../component/ui/text-logo";
+import { loginWithEmail } from "../api/auth.requests";
 import backgroundImage from "/assets/bgl.jpg";
 import { Link } from "react-router-dom";
+import { CLIENT_STORAGE } from "@orashus/client-storage";
+
+const localStorage = new CLIENT_STORAGE("local");
 
 export default function Login() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!email.trim() || !password.trim()) {
+      return;
+    }
+
+    loginWithEmail(email, password)
+      .then(({ data, message, status }) => {
+        localStorage.save("token", data);
+      })
+      .catch(console.warn)
+      .finally(() => {
+        console.log("done");
+      });
+  }
+
   return (
     <div className="min-h-screen flex">
       <div className="w-full md:w-1/2 flex flex-col justify-center px-8 py-12 bg-app-gray-0">
@@ -19,7 +45,7 @@ export default function Login() {
             </Link>
           </p>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label htmlFor="email" className="block text-sm font-semibold">
                 Email Address
@@ -29,6 +55,8 @@ export default function Login() {
                 id="email"
                 className="input input-bordered w-full px-4 py-2 border border-app-gray-300 rounded-lg focus:outline-none focus:border-primary"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -41,6 +69,8 @@ export default function Login() {
                 id="password"
                 className="input input-bordered w-full px-4 py-2 border border-app-gray-300 rounded-lg focus:outline-none focus:border-primary"
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -57,8 +87,8 @@ export default function Login() {
               </a>
             </div>
 
-            <button className="btn btn-primary w-full py-3 text-app-gray-0 text-lg rounded-lg shadow-lg hover:bg-primary-dark transition">
-              Sign in
+            <button type="submit" className="btn btn-primary w-full py-3 text-app-gray-0 text-lg rounded-lg shadow-lg hover:bg-primary-dark transition">
+              Sign in a
             </button>
           </form>
         </div>
