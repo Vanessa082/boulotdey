@@ -1,5 +1,6 @@
 import { FaHourglassHalf, FaUsers, FaUserShield } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
+import SearchJob from "./search-job";
 interface STATS {
   _id: string,
   label: string,
@@ -57,15 +58,13 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center gap-4 px-6 py-8 lg:py-16 bg-hero-banner bg-center bg-cover">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center gap-8 px-6 py-8 lg:py-16 bg-hero-banner bg-center bg-cover">
       <div className="text-center text-app-gray-0">
         <h1 className="text-center font-extrabold text-4xl">Secure Connections, Real Opportunities</h1>
         <p className="text-xl font-semibold text-app-gray-50">BoulotDey connects job seekers and employers in Cameroon&apos;s petite métier sector through a trusted and secure platform. Every profile and job listing is verified, ensuring peace of mind for both workers and businesses.</p>
       </div>
 
-      <div>
-        <button>Find Job</button>
-      </div>
+      <SearchJob />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {STATS.map(({ icon,  label, total }, index) => (

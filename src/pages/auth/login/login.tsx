@@ -3,27 +3,35 @@ import { useState, type FormEvent } from "react";
 import { TextLogo } from "../../../component/ui/text-logo";
 import { loginWithEmail } from "../api/auth.requests";
 import backgroundImage from "/assets/bgl.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
+import { toast } from "sonner";
 
 const localStorage = new CLIENT_STORAGE("local");
 
 export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!email.trim() || !password.trim()) {
-      return;
+      return toast.warning("Input Password Or Email");
     }
 
     loginWithEmail(email, password)
       .then(({ data, message, status }) => {
         localStorage.save("token", data);
+        toast.success("Successful login redirecting ...");
+        navigate("/job-board")
+
       })
-      .catch(console.warn)
+      .catch(() => {
+        console.error("Invalid Email or Password");
+        toast.error("Invalid Email or Password")
+      })
       .finally(() => {
         console.log("done");
       });
@@ -88,7 +96,7 @@ export default function Login() {
             </div>
 
             <button type="submit" className="btn btn-primary w-full py-3 text-app-gray-0 text-lg rounded-lg shadow-lg hover:bg-primary-dark transition">
-              Sign in a
+              Sign in 
             </button>
           </form>
         </div>
