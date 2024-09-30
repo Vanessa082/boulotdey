@@ -24,7 +24,7 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
     setCurrentUserLoading(true);
 
     getCurrentUser()
-      .then(({ message, status, data }) => {
+      .then(({  data }) => {
         setCurrentUser(data);
       }).finally(() => {
         setCurrentUserLoading(false);
