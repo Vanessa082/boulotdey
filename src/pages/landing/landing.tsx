@@ -6,7 +6,7 @@ export default function LandingPage() {
 
   return (
     <main>
-      <HeroSection />
+      <HeroSection/>
 
       <pre>
         {JSON.stringify(currentUser, null, 4)}

@@ -1,14 +1,35 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { TextLogo } from "../../../component/ui/text-logo";
 import backgroundImage from "/assets/bgl.jpg";
-import { Link } from "react-router-dom";
-import { useAppContext } from "../../../providers/context/app-context/app-context";
+import { Link, useNavigate } from "react-router-dom";
+import { createAccount } from "../api/auth.requests";
+import { User } from "../../../interfaces/users";
+import { CLIENT_STORAGE } from "@orashus/client-storage";
+import { toast } from "sonner";
+
+const localStorage = new CLIENT_STORAGE("local")
 
 export default function CreateAccountPage() {
-  const [role, setRole] = useState("employee"); 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const {} = useAppContext()
+  const navigate = useNavigate()
+  const [user, setUser] = useState<Partial<User>>({
+    role: "EMPLOYEE"
+  });
+
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    createAccount(user)
+      .then(({ data, message, status }) => {
+        localStorage.save("token", data);
+        toast.success("Registration was successful ...");
+        navigate("/job-board")
+      })
+      .catch(() => {
+        console.error;
+        toast.error("User already exists, please login")
+      })
+  }
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-app-gray-50">
@@ -25,76 +46,30 @@ export default function CreateAccountPage() {
               Log in
             </Link>
           </p>
-
-          <div className="mb-6">
-            <label className="mr-4 font-medium">Create Account as:</label>
-            <div className="flex space-x-4">
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  name="role"
-                  value="employee"
-                  className="form-radio text-app-green-500"
-                  checked={role === "employee"}
-                  onChange={() => setRole("employee")}
-                />
-                <span className="ml-2">Employee</span>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="firstName" className="block text-sm font-medium">
+                First Name
               </label>
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  name="role"
-                  value="employer"
-                  className="form-radio text-app-green-500"
-                  checked={role === "employer"}
-                  onChange={() => setRole("employer")}
-                />
-                <span className="ml-2">Employer</span>
-              </label>
+              <input
+                type="text"
+                id="firstName"
+                className="input border w-full py-2 px-4 rounded-md shadow-sm"
+                placeholder="First Name"
+              />
             </div>
-          </div>
 
-          <form>
-            {role === "employee" ? (
-              <>
-                <div className="mb-4">
-                  <label htmlFor="firstName" className="block text-sm font-medium">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    className="input border w-full py-2 px-4 rounded-md shadow-sm"
-                    placeholder="First Name"
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label htmlFor="lastName" className="block text-sm font-medium">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    className="input border w-full py-2 px-4 rounded-md shadow-sm"
-                    placeholder="Last Name"
-                  />
-                </div>
-              </>
-            ) : (
-              <div className="mb-4">
-                <label htmlFor="businessName" className="block text-sm font-medium">
-                  Business/Company Name
-                </label>
-                <input
-                  type="text"
-                  id="businessName"
-                  className="input border w-full py-2 px-4 rounded-md shadow-sm"
-                  placeholder="Business or Company Name"
-                />
-              </div>
-            )}
-
+            <div className="mb-4">
+              <label htmlFor="lastName" className="block text-sm font-medium">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                className="input border w-full py-2 px-4 rounded-md shadow-sm"
+                placeholder="Last Name"
+              />
+            </div>
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium">
                 Email address
@@ -104,8 +79,8 @@ export default function CreateAccountPage() {
                 id="email"
                 className="input border w-full py-2 px-4 rounded-md shadow-sm"
                 placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={user?.email || ""}
+                onChange={(e) => setUser((prev) => ({ ...prev, email: e.target.value }))}
               />
             </div>
 
@@ -118,8 +93,8 @@ export default function CreateAccountPage() {
                 id="password"
                 className="input border w-full py-2 px-4 rounded-md shadow-sm"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={user?.password || ""}
+                onChange={(e) => setUser((prev) => ({ ...prev, password: e.target.value }))}
               />
             </div>
 
@@ -128,10 +103,12 @@ export default function CreateAccountPage() {
                 Phone Number
               </label>
               <input
-                type="password"
+                type="phoneNumber"
                 id="phone Number"
                 className="input border w-full py-2 px-4 rounded-md shadow-sm"
                 placeholder="6 712 013 49"
+                value={user?.phoneNumber || ""}
+                onChange={(e) => setUser((prev) => ({ ...prev, phoneNumber: e.target.value }))}
               />
             </div>
 
@@ -143,14 +120,14 @@ export default function CreateAccountPage() {
               </label>
             </div>
 
-            <button className="btn btn-primary w-full py-3  text-app-gray-0 bg-text-app-green-500 hover:bg-app-green-800">
+            <button type="submit" className="btn btn-primary w-full py-3  text-app-gray-0 bg-text-app-green-500 hover:bg-app-green-800">
               Create Account
             </button>
           </form>
         </div>
       </div>
 
-      <div className="hidden md:flex w-1/2 relative">
+      <div className="hidden md:flex w-full relative">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{

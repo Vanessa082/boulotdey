@@ -12,7 +12,7 @@ const createAccount = (user: Partial<User>) => {
 
 const loginWithEmail = (email: string, password: string) => {
   return httpClient.POST<APIResponse<string | null>>("/login/email", { email, password });
-}
+};
 
 export {
   createAccount,

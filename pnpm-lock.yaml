@@ -15,8 +15,8 @@ importers:
         specifier: ^0.0.16
         version: 0.0.16
       '@orashus/http-client':
-        specifier: ^0.0.4
-        version: 0.0.4(@swc/core@1.7.26)(jiti@1.21.6)(postcss@8.4.47)(yaml@2.5.1)
+        specifier: ^0.0.5
+        version: 0.0.5(@swc/core@1.7.26)(jiti@1.21.6)(postcss@8.4.47)(yaml@2.5.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -32,6 +32,9 @@ importers:
       react-router-dom:
         specifier: ^6.26.2
         version: 6.26.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      sonner:
+        specifier: ^1.5.0
+        version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@eslint/js':
         specifier: ^9.9.0
@@ -450,8 +453,8 @@ packages:
   '@orashus/client-storage@0.0.16':
     resolution: {integrity: sha512-GViYiP5PAtDkqwiDDvEleH5cmxtq4xroIYL5QRv17xhVKxrKdxLKpHamTB7fnWvDWW0WFuln4XzKG3QVtdPFRg==}
 
-  '@orashus/http-client@0.0.4':
-    resolution: {integrity: sha512-bJRjmJJBnWBb/4aVmuqgncAokXNh1oWDgcvK1mDOUMkCFePUKFMuVWKN3L0c3+rcHkHcywnz4s0JtQXSyNo68w==}
+  '@orashus/http-client@0.0.5':
+    resolution: {integrity: sha512-duJomkeE3vzPdXZZumYD4ouLf3tbIcUGPT/baQNS9t7mWqcp0B1GsHYL3q0FZKOYDRIt1AeuvU9FI0CnhLwpCg==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1429,6 +1432,12 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
+  sonner@1.5.0:
+    resolution: {integrity: sha512-FBjhG/gnnbN6FY0jaNnqZOMmB73R+5IiyYAw8yBj7L54ER7HB3fOSE5OFiQiE2iXWxeXKvg6fIP4LtVppHEdJA==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -1855,7 +1864,7 @@ snapshots:
 
   '@orashus/client-storage@0.0.16': {}
 
-  '@orashus/http-client@0.0.4(@swc/core@1.7.26)(jiti@1.21.6)(postcss@8.4.47)(yaml@2.5.1)':
+  '@orashus/http-client@0.0.5(@swc/core@1.7.26)(jiti@1.21.6)(postcss@8.4.47)(yaml@2.5.1)':
     dependencies:
       tsup: 8.3.0(@swc/core@1.7.26)(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.2)(yaml@2.5.1)
       typescript: 5.6.2
@@ -2785,6 +2794,11 @@ snapshots:
   signal-exit@3.0.7: {}
 
   signal-exit@4.1.0: {}
+
+  sonner@1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   source-map-js@1.2.1: {}
 

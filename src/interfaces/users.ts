@@ -7,6 +7,7 @@ interface User {
   phoneNumber?: string;
   email: string;
   role: UserRoles;
+  password: string;
   createdAt: string;
   updatedAt: string;
 }
