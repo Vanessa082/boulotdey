@@ -3,6 +3,7 @@ import AppWrapper from "./component/common/app-wrapper";
 import LandingPage from "./pages/landing/landing";
 import CreateAccountPage from "./pages/auth/create-account/create-account-page";
 import Login from "./pages/auth/login/login";
+import JobBoard from "./pages/jobboard/jobboard";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route index element={<LandingPage />} />
           <Route path="/create-account" element={<CreateAccountPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/job-board" element={<JobBoard/>} />
         </Route>
       </Routes>
     </Router>

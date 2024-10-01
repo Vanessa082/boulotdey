@@ -1,7 +1,5 @@
 import { FormEvent, useState } from "react";
-import { TextLogo } from "../../../component/ui/text-logo";
-import backgroundImage from "/assets/bgl.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createAccount } from "../api/auth.requests";
 import { User } from "../../../interfaces/users";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
@@ -10,11 +8,12 @@ import { toast } from "sonner";
 const localStorage = new CLIENT_STORAGE("local")
 
 export default function CreateAccountPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate(); 
+  const location = useLocation();
+  
   const [user, setUser] = useState<Partial<User>>({
-    role: "EMPLOYEE"
+    role: location.state?.role || "EMPLOYEE"
   });
-
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,12 +31,7 @@ export default function CreateAccountPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-app-gray-50">
-      <div className="w-full md:w-1/2 flex flex-col justify-center px-8 py-12 bg-white">
-        <div className="max-w-md mx-auto">
-          <div className="flex justify-center mb-8">
-            <TextLogo />
-          </div>
+        <div className="max-w-md mx-auto pt-20">
 
           <h2 className="text-4xl font-bold mb-6">Create your account</h2>
           <p className="mb-4">
@@ -47,29 +41,6 @@ export default function CreateAccountPage() {
             </Link>
           </p>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="firstName" className="block text-sm font-medium">
-                First Name
-              </label>
-              <input
-                type="text"
-                id="firstName"
-                className="input border w-full py-2 px-4 rounded-md shadow-sm"
-                placeholder="First Name"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="lastName" className="block text-sm font-medium">
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                className="input border w-full py-2 px-4 rounded-md shadow-sm"
-                placeholder="Last Name"
-              />
-            </div>
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium">
                 Email address
@@ -81,6 +52,7 @@ export default function CreateAccountPage() {
                 placeholder="Email address"
                 value={user?.email || ""}
                 onChange={(e) => setUser((prev) => ({ ...prev, email: e.target.value }))}
+                required
               />
             </div>
 
@@ -95,6 +67,22 @@ export default function CreateAccountPage() {
                 placeholder="Password"
                 value={user?.password || ""}
                 onChange={(e) => setUser((prev) => ({ ...prev, password: e.target.value }))}
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-sm font-medium">
+               Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                className="input border w-full py-2 px-4 rounded-md shadow-sm"
+                placeholder="Confirm Password"
+                value={user?.confirmPassword || ""}
+                onChange={(e) => setUser((prev) => ({ ...prev, confirmPassword: e.target.value }))}
+                required
               />
             </div>
 
@@ -109,6 +97,7 @@ export default function CreateAccountPage() {
                 placeholder="6 712 013 49"
                 value={user?.phoneNumber || ""}
                 onChange={(e) => setUser((prev) => ({ ...prev, phoneNumber: e.target.value }))}
+                required
               />
             </div>
 
@@ -125,36 +114,5 @@ export default function CreateAccountPage() {
             </button>
           </form>
         </div>
-      </div>
-
-      <div className="hidden md:flex w-full relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-green-900 bg-opacity-50"></div>
-        <div className="relative z-10 text-app-gray-0 flex flex-col justify-center items-center w-full">
-          <div className="text-center max-w-lg">
-            <h2 className="text-4xl font-bold mb-4">Over 175,324 candidates waiting for good employees.</h2>
-            <div className="flex justify-around mt-8">
-              <div className="text-center">
-                <span className="text-3xl font-bold">175,324</span>
-                <p className="text-sm">Live Jobs</p>
-              </div>
-              <div className="text-center">
-                <span className="text-3xl font-bold">87,354</span>
-                <p className="text-sm">Companies</p>
-              </div>
-              <div className="text-center">
-                <span className="text-3xl font-bold">7,532</span>
-                <p className="text-sm">New Jobs</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }

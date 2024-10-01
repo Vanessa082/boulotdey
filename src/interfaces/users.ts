@@ -8,6 +8,7 @@ interface User {
   email: string;
   role: UserRoles;
   password: string;
+  confirmPassword: string;
   createdAt: string;
   updatedAt: string;
 }
