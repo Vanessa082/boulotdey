@@ -7,7 +7,7 @@ interface SelectRoleModalProps {
 }
 
 export function SelectRoleModal({ closeModal }: SelectRoleModalProps) {
-  const [user, setUser] = useState<Partial<User>>({
+  const [, setUser] = useState<Partial<User>>({
     role: "EMPLOYEE",
   });
   const navigate = useNavigate();
