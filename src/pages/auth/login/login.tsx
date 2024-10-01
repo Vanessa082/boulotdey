@@ -1,18 +1,26 @@
 import { useState, type FormEvent } from "react";
-
 import { TextLogo } from "../../../component/ui/text-logo";
 import { loginWithEmail } from "../api/auth.requests";
-import backgroundImage from "/assets/bgl.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
 import { toast } from "sonner";
+import { SelectRoleModal } from "../create-account/select-role-modal";
 
 const localStorage = new CLIENT_STORAGE("local");
 
 export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // Modal state
   const navigate = useNavigate();
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,32 +33,27 @@ export default function Login() {
       .then(({ data }) => {
         localStorage.save("token", data);
         toast.success("Successful login redirecting ...");
-        navigate("/job-board")
-
+        navigate("/job-board");
       })
       .catch(() => {
         console.error("Invalid Email or Password");
-        toast.error("Invalid Email or Password")
+        toast.error("Invalid Email or Password");
       })
       .finally(() => {
         console.log("done");
       });
-  }
+  };
 
   return (
-    <div className="min-h-screen flex">
-      <div className="w-full md:w-1/2 flex flex-col justify-center px-8 py-12 bg-app-gray-0">
-        <div className="max-w-md mx-auto">
-          <div className="flex justify-center mb-8">
-            <TextLogo className="text-app-gray-900" />
-          </div>
+    <>
+        <div className="max-w-md mx-auto pt-20">
 
           <h2 className="text-4xl font-semibold mb-6">Welcome Back!</h2>
           <p className="mb-4 text-app-gray-600">
             Don't have an account?{" "}
-            <Link to="/create-account" className="text-primary hover:underline">
+            <span onClick={openModal} className="text-primary hover:underline cursor-pointer">
               Create one today
-            </Link>
+            </span>
           </p>
 
           <form onSubmit={handleSubmit}>
@@ -100,40 +103,7 @@ export default function Login() {
             </button>
           </form>
         </div>
-      </div>
-
-      <div className="hidden md:flex w-1/2 relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-          }}
-        ></div>
-
-        <div className="absolute inset-0 bg-app-green-900 bg-opacity-50"></div>
-
-        <div className="relative z-10 text-app-gray-0 flex flex-col justify-center items-center w-full">
-          <div className="text-center max-w-lg">
-            <h2 className="text-5xl font-bold mb-4">
-              Over 175,324 candidates waiting for you!
-            </h2>
-            <div className="flex justify-around mt-8">
-              <div className="text-center">
-                <span className="text-4xl font-bold">175,324</span>
-                <p className="text-lg">Live Jobs</p>
-              </div>
-              <div className="text-center">
-                <span className="text-4xl font-bold">87,354</span>
-                <p className="text-lg">Companies</p>
-              </div>
-              <div className="text-center">
-                <span className="text-4xl font-bold">7,532</span>
-                <p className="text-lg">New Jobs</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      {isModalOpen && <SelectRoleModal closeModal={closeModal} />}
+    </>
   );
 }
