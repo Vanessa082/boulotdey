@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createAccount } from "../api/auth.requests";
 import { User } from "../../../interfaces/users";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
@@ -8,9 +8,11 @@ import { toast } from "sonner";
 const localStorage = new CLIENT_STORAGE("local")
 
 export default function CreateAccountPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate(); 
+  const location = useLocation();
+  
   const [user, setUser] = useState<Partial<User>>({
-    
+    role: location.state?.role || "EMPLOYEE"
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
