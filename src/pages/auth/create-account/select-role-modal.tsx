@@ -15,6 +15,7 @@ export function SelectRoleModal({ closeModal }: SelectRoleModalProps) {
   const handleRoleSelection = (role: User["role"]) => {
     setUser((prevUser) => ({ ...prevUser, role }));
     navigate("/create-account", { state: { role } }); 
+    console.log( "selected role :",role)
     closeModal();
   };
 

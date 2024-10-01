@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { TextLogo } from "../../../component/ui/text-logo";
 import { Link, useNavigate } from "react-router-dom";
 import { createAccount } from "../api/auth.requests";
 import { User } from "../../../interfaces/users";
@@ -13,17 +12,6 @@ export default function CreateAccountPage() {
   const [user, setUser] = useState<Partial<User>>({
     
   });
-  const [showPassword, setShowPassword] = useState<Boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState<Boolean>(false);
-
-
-  const toggleToShowPassword = () => {
-    setShowPassword(true)
-  }
-
-  const toggleToShowConfirmPassword = () => {
-    setShowConfirmPassword(true)
-  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

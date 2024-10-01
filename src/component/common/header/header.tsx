@@ -19,7 +19,7 @@ const navItems: NavItem[] = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { currentUser, currentUserLoading } = useAppContext();
+  const { currentUser } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -29,7 +29,6 @@ export default function Header() {
 
   return (
     <header className="w-full px-4 py-4 flex items-center justify-between bg-app-gray-0 shadow-md sticky top-0 z-50 transition-all duration-300 ease-in-out">
-      {/* Logo */}
       <Link to="/">
         <TextLogo />
       </Link>

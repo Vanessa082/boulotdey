@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from "react";
-import { TextLogo } from "../../../component/ui/text-logo";
 import { loginWithEmail } from "../api/auth.requests";
 import {  useNavigate } from "react-router-dom";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
