@@ -4,8 +4,15 @@ import { createAccount } from "../api/auth.requests";
 import { User } from "../../../interfaces/users";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
 import { toast } from "sonner";
+import * as yup from "yup";
 
-const localStorage = new CLIENT_STORAGE("local")
+const localStorage = new CLIENT_STORAGE("local");
+ const schama = yup.object().shape({
+  email: yup.string().email("Invalid email format").required("Email is required"),
+  password: yup.string().min(8, "Password must be at least 8 characters").required("password is required"),
+  confirmPassword: yup.string().oneOf([yup.ref('password')], "password must match").required("Please confirm password"),
+  phoneNumber:yup.string().matches(/^6\d{8}$/, "Phone number must start with 6 and must be 9 digits").required("Phone Number is required")
+ })
 
 export default function CreateAccountPage() {
   const navigate = useNavigate(); 
