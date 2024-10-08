@@ -1,8 +1,8 @@
-import { useState } from "react"
+// import { useState } from "react"
 
 export default function RedirectModal() {
-  const [isModalOpen, setIsModalOpen] = useState<Boolean>(true)
-  
+  // const [isModalOpen, setIsModalOpen] = useState<Boolean>(true)
+
 
   const closeModal = () => {
   }
