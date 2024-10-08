@@ -7,14 +7,17 @@ const httpClient = new HttpClient({
 });
 
 const createAccount = (user: Partial<User>) => {
-  return httpClient.POST<APIResponse<string | null>>("/auth/create-account", user);
+  return httpClient.POST<APIResponse<string | null>>(
+    "/auth/create-account",
+    user
+  );
 };
 
 const loginWithEmail = (email: string, password: string) => {
-  return httpClient.POST<APIResponse<string | null>>("/auth/login/email", { email, password });
+  return httpClient.POST<APIResponse<string | null>>("/auth/login/email", {
+    email,
+    password,
+  });
 };
 
-export {
-  createAccount,
-  loginWithEmail,
-};
+export { createAccount, loginWithEmail };

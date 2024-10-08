@@ -5,12 +5,10 @@ export default function LandingPage() {
   const { currentUser } = useAppContext();
 
   return (
-    <main>
-      <HeroSection/>
+    <main className="w-full">
+      <HeroSection />
 
-      <pre>
-        {JSON.stringify(currentUser, null, 4)}
-      </pre>
+      <pre>{JSON.stringify(currentUser, null, 4)}</pre>
     </main>
   );
 }

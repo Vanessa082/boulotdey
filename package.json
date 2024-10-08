@@ -12,10 +12,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "@orashus/client-storage": "^0.0.16",
     "@orashus/http-client": "^0.0.5",
+    "@types/react-slick": "^0.23.13",
+    "@types/slick-carousel": "^1.6.40",
     "clsx": "^2.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

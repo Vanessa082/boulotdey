@@ -1,5 +1,4 @@
 import type { ComponentProps } from "react";
-
 interface TextLogoProps extends ComponentProps<"h1"> {
   text?: string;
 }
@@ -18,7 +17,7 @@ export function TextLogo({
       }
     >
       <img src="/logo.svg" alt="App logo" width={32} height={41} />
-      <span>{text}</span>
+      <span className="text-xl">{text}</span>
     </h1>
   );
 }

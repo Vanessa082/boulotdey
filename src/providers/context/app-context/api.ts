@@ -8,8 +8,6 @@ const httpClient = new HttpClient({});
 
 const getCurrentUser = () => {
   return httpClient.GET<APIResponse<User>>(["auth", "current-user"]);
-}
-
-export {
-  getCurrentUser
 };
+
+export { getCurrentUser };

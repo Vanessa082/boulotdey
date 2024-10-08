@@ -1,9 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { TextLogo } from "../../ui/text-logo";
-import { FaBars, FaBell, FaChevronDown, FaChevronUp, FaComments, FaTimes } from "react-icons/fa"; // Importing React Icons
+import {
+  FaBars,
+  FaBell,
+  FaChevronDown,
+  FaChevronUp,
+  FaSearch,
+  FaTimes,
+} from "react-icons/fa"; // Importing React Icons
 import { useAppContext } from "../../../providers/context/app-context/app-context";
-import SearchJob from "../../../pages/landing/hero-section/search-job";
+import SearchJob from "./search-job";
+import { CLIENT_STORAGE } from "@orashus/client-storage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 interface NavItem {
   text: string;
@@ -12,122 +22,157 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { text: "Home", href: "/" },
-  { text: "Job Board", href: "/job-board" },
+  { text: "Jobs", href: "/job-board" },
   { text: "About", href: "/about" },
   { text: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { currentUser } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  const isEmployer = currentUser?.role === "EMPLOYER";
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const localStorage = new CLIENT_STORAGE("local");
+
+  const handleLogout = () => {
+    localStorage.remove("token");
+    navigate("/");
+  };
 
   return (
-    <header className="w-full px-4 py-4 flex items-center justify-between bg-app-gray-0 shadow-md sticky top-0 z-50 transition-all duration-300 ease-in-out">
-      <Link to="/">
-        <TextLogo />
-      </Link>
-
-      <nav className="hidden md:flex font-sans font-bold items-center space-x-6">
-        {navItems.map(({ text, href }) => (
-          <Link
-            key={text}
-            to={href}
-            className="text-app-gray-900 transition-colors"
-          >
-            <span>{text}</span>
-          </Link>
-        ))}
-      </nav>
-
-      <button
-        className="md:hidden text-gray-700"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle navigation"
-      >
-        {menuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
-      </button>
-
-      {menuOpen && (
-        <nav className="absolute top-16 left-0 w-full bg-app-gray-0 shadow-lg z-50 md:hidden">
-          <ul className="flex flex-col items-center space-y-4 py-6">
-            {navItems.map(({ text, href }) => (
-              <li key={text}>
-                <Link
-                  to={href}
-                  className="flex items-center space-x-1 text-lg font-bold hover:text-app-green-500 transition-colors"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <span>{text}</span>
-                </Link>
-              </li>
-            ))}
-
-            {currentUser ? (
-              <>
-                <li>
-                  <Link to="/notification">
-                    <FaBell className="text-app-green-500 h-6 w-6" />
-                  </Link>
-                </li>
-
-                <li>
-                  <Link to="/chats">
-                    <FaComments className="text-app-green-500 h-6 w-6" />
-                    Chat
-                  </Link>
-                </li>
-                {isEmployer && (
-                  <li>
-                    <Link to="/post-job">
-                      <button className="bg-app-green-500 px-5 py-2.5 w-full rounded-md font-bold font-sans text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
-                        Post Job
-                      </button>
-                    </Link>
-                  </li>
-                )}
-              </>
-            ) : (
-              <>
-
-                <Link to="/login">
-                  <button className="bg-app-green-500 px-5 py-2.5 w-full font-sans font-bold rounded-md text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
-                    Login
-                  </button>
-                </Link>
-
-                <li>
-                  <Link to="/post-job">
-                    <button className="bg-app-green-500 px-5 py-2.5 w-full rounded-md font-bold font-sans text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
-                      Post Job
-                    </button>
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
+    <header className="w-full px-4 py-2 flex items-center justify-between bg-app-gray-0  sticky top-0 z-50 transition-all duration-300 ease-in-out ">
+      <div className="flex gap-20">
+        <Link to="/">
+          <TextLogo />
+        </Link>
+        <nav className="hidden md:flex font-sans  font-bold items-center gap-10">
+          {navItems.map(({ text, href }) => (
+            <Link
+              key={text}
+              to={href}
+              className="text-app-gray-900 transition-colors"
+            >
+              <span>{text}</span>
+            </Link>
+          ))}
         </nav>
-      )}
+      </div>
+
+      {/* Smaller screens */}
+
+      <div className="md:hidden text-app-gray-900 flex justify-between items-center gap-4">
+        <FaSearch className="h-6 w-6" onClick={openModal} />
+
+        {currentUser ? (
+          <>
+            <li>
+              <Link to="/notification">
+                <FaBell className="text-app-green-500 h-7 w-7" />
+              </Link>
+            </li>
+
+            <li>
+              <div className="dropdown dropdown-end">
+
+                <button tabIndex={0} onClick={toggleDropdown} className="bg-app-green-500 cursor-pointer rounded-full px-3 py-1.5 font-sans font-bold text-white">
+                  {currentUser.email.charAt(0).toUpperCase()}
+                </button>
+
+                <ul
+                  tabIndex={0}
+                  className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ${isOpen ? "block" : "hidden"}`}
+                >
+                  <li>
+                    <a href="/profile">Profile</a>
+                  </li>
+                  <li>
+                    <a href="/settings">Settings</a>
+                  </li>
+                  <li onClick={handleLogout} className="cursor-pointer">
+                    Log out
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+          </>
+        ) : (
+          <Link to="/login">
+            <FontAwesomeIcon icon={faUser} className="h-7 w-7" />
+          </Link>
+        )}
+
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation"
+        >
+          {menuOpen ? (
+            <FaTimes className="h-6 w-6" />
+          ) : (
+            <FaBars className="h-6 w-6" />
+          )}
+        </button>
+
+        {isModalOpen && <SearchJob closeModal={closeModal} />}
+
+        {menuOpen && (
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 z-40">
+            <div className="fixed top-0 left-0 w-3/4 sm:w-2/4 md:w-1/3 h-full bg-white shadow-lg z-50">
+              <div className="flex flex-col p-6">
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className="self-end mb-8"
+                >
+                  <FaTimes className="h-6 w-6" />
+                </button>
+                <nav>
+                  <ul className="flex flex-col space-y-6 text-lg font-bold">
+                    {navItems.map(({ text, href }) => (
+                      <li key={text}>
+                        <Link
+                          to={href}
+                          className="hover:text-blue-500 transition-colors"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          {text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Buttons for Desktop */}
       <div className="hidden md:flex gap-5 items-center">
+        <SearchJob />
         {currentUser ? (
           <>
-            <SearchJob />
             <Link to="/notification">
               <FaBell className="text-app-green-500 h-6 w-6" />
             </Link>
 
-
-            <Link to="/chats" className="flex items-center gap-2">
+            {/* <Link to="/chats" className="flex items-center gap-2">
               <FaComments className="text-app-green-500 h-6 w-6" />
               Chat
-            </Link>
+            </Link> */}
 
             <div className="dropdown dropdown-end">
               <div
@@ -143,7 +188,7 @@ export default function Header() {
 
               <ul
                 tabIndex={0}
-                className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ${isOpen ? 'block' : 'hidden'}`}
+                className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ${isOpen ? "block" : "hidden"}`}
               >
                 <li>
                   <a href="/profile">Profile</a>
@@ -151,13 +196,13 @@ export default function Header() {
                 <li>
                   <a href="/settings">Settings</a>
                 </li>
-                <li>
-                  <a href="/logout">Log out</a>
+                <li onClick={handleLogout} className="cursor-pointer">
+                  Log out
                 </li>
               </ul>
             </div>
 
-            {isEmployer && (
+            {/* {isEmployer && (
 
               <Link to="/post-job">
                 <button className="bg-app-green-500 px-5 py-2.5 w-full rounded-md font-bold font-sans text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
@@ -165,28 +210,27 @@ export default function Header() {
                 </button>
               </Link>
 
-            )}
+            )} */}
           </>
         ) : (
           <>
             <li>
               <Link to="/login">
-                <button className="bg-app-green-500 px-5 py-2.5 w-full font-sans font-bold rounded-md text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
+                <button className="bg-app-gray-0 border-2 border-app-green-500 px-5 py-1 w-full font-sans font-bold rounded-md text-app-green-500 hover:bg-opacity-90 transition-all flex items-center justify-center">
                   Login
                 </button>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/post-job">
-                <button className="bg-app-green-500 px-5 py-2.5 w-full rounded-md font-bold font-sans text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
+                <button className="bg-app-green-500 px-5 border-1s py-2 w-full rounded-md font-bold font-sans text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
                   Post Job
                 </button>
               </Link>
-            </li>
+            </li> */}
           </>
-        )
-        }
+        )}
       </div>
-    </header >
+    </header>
   );
 }
