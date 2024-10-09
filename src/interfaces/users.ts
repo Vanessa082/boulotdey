@@ -13,7 +13,4 @@ interface User {
   updatedAt: string;
 }
 
-export type {
-  User,
-  UserRoles,
-};
+export type { User, UserRoles };

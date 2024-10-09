@@ -11,7 +11,7 @@ interface APP_CONTEXT {
   setCurrentUserLoading: Dispatch<SetStateAction<boolean>>;
 
   setRefetchCurrentUser: Dispatch<SetStateAction<boolean>>;
-};
+}
 
 const AppContext = createContext<APP_CONTEXT>({} as APP_CONTEXT);
 
@@ -24,23 +24,26 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
     setCurrentUserLoading(true);
 
     getCurrentUser()
-      .then(({  data }) => {
+      .then(({ data }) => {
         setCurrentUser(data);
-      }).finally(() => {
+      })
+      .finally(() => {
         setCurrentUserLoading(false);
       });
   }, [refetchCurrentUser]);
 
   return (
-    <AppContext.Provider value={{
-      currentUser,
-      setCurrentUser,
+    <AppContext.Provider
+      value={{
+        currentUser,
+        setCurrentUser,
 
-      currentUserLoading,
-      setCurrentUserLoading,
+        currentUserLoading,
+        setCurrentUserLoading,
 
-      setRefetchCurrentUser,
-    }}>
+        setRefetchCurrentUser,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
@@ -48,7 +51,4 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
 
 const useAppContext = () => useContext(AppContext);
 
-export {
-  useAppContext,
-  AppContextProvider
-}
+export { useAppContext, AppContextProvider };

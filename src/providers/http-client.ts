@@ -14,11 +14,9 @@ const HttpClient = HttpClientProvider({
   },
   base_before_req_headers() {
     return {
-      "Authorization": `Bearer ${storage.get("token", { fallback: ""})}`
-    }
+      Authorization: `Bearer ${storage.get("token", { fallback: "" })}`,
+    };
   },
 });
 
-export {
-  HttpClient,
-};
+export { HttpClient };

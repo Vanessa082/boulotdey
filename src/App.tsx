@@ -11,9 +11,9 @@ function App() {
       <Routes>
         <Route element={<AppWrapper />}>
           <Route index element={<LandingPage />} />
-          <Route path="/create-account" element={<CreateAccountPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/job-board" element={<JobBoard/>} />
+          <Route path="create-account" element={<CreateAccountPage />} />
+          <Route path="login" element={<Login />} />
+          <Route path="job-board" element={<JobBoard />} />
         </Route>
       </Routes>
     </Router>

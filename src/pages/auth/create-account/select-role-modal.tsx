@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { User } from "../../../interfaces/users";
 
 interface SelectRoleModalProps {
-  closeModal: () => void; 
+  closeModal: () => void;
 }
 
 export function SelectRoleModal({ closeModal }: SelectRoleModalProps) {
@@ -14,23 +14,23 @@ export function SelectRoleModal({ closeModal }: SelectRoleModalProps) {
 
   const handleRoleSelection = (role: User["role"]) => {
     setUser((prevUser) => ({ ...prevUser, role }));
-    navigate("/create-account", { state: { role } }); 
+    navigate("/create-account", { state: { role } });
     closeModal();
   };
 
   return (
     <div
       className="w-full fixed inset-0 z-10 bg-gray-800 bg-opacity-50 flex justify-center items-center"
-      onClick={closeModal} 
+      onClick={closeModal}
     >
       <form
-        onSubmit={(e) => e.preventDefault()} 
+        onSubmit={(e) => e.preventDefault()}
         className="bg-app-gray-0 rounded-md p-5 text-center w-[80%] max-w-[400px]"
         onClick={(e) => e.stopPropagation()} // Prevent closing the modal when clicking inside
       >
         <span
           className="text-gray-600 absolute right-5 top-5 text-sm cursor-pointer"
-          onClick={closeModal} 
+          onClick={closeModal}
         >
           &times;
         </span>

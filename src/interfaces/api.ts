@@ -4,6 +4,4 @@ interface APIResponse<T = null> {
   data: T;
 }
 
-export type {
-  APIResponse,
-};
+export type { APIResponse };
