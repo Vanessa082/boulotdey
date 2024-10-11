@@ -4,16 +4,15 @@ import { TextLogo } from "../../ui/text-logo";
 import {
   FaBars,
   FaBell,
-  FaChevronDown,
-  FaChevronUp,
   FaSearch,
   FaTimes,
-} from "react-icons/fa"; // Importing React Icons
+} from "react-icons/fa";
 import { useAppContext } from "../../../providers/context/app-context/app-context";
 import SearchJob from "./search-job";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { ProfileSection } from "./sub";
 
 interface NavItem {
   text: string;
@@ -81,14 +80,14 @@ export default function Header() {
           <>
             <li>
               <Link to="/notification">
-                <FaBell className="text-app-green-500 h-7 w-7" />
+                <FaBell className="text-primary h-7 w-7" />
               </Link>
             </li>
 
             <li>
               <div className="dropdown dropdown-end">
 
-                <button tabIndex={0} onClick={toggleDropdown} className="bg-app-green-500 cursor-pointer rounded-full px-3 py-1.5 font-sans font-bold text-white">
+                <button tabIndex={0} onClick={toggleDropdown} className="bg-primary cursor-pointer rounded-full px-3 py-1.5 font-sans font-bold text-white">
                   {currentUser.email.charAt(0).toUpperCase()}
                 </button>
 
@@ -160,76 +159,13 @@ export default function Header() {
         )}
       </div>
 
-      {/* Buttons for Desktop */}
       <div className="hidden md:flex gap-5 items-center">
         <SearchJob />
-        {currentUser ? (
-          <>
-            <Link to="/notification">
-              <FaBell className="text-app-green-500 h-6 w-6" />
-            </Link>
 
-            {/* <Link to="/chats" className="flex items-center gap-2">
-              <FaComments className="text-app-green-500 h-6 w-6" />
-              Chat
-            </Link> */}
-
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                className="flex cursor-pointer items-center gap-3"
-                onClick={toggleDropdown}
-              >
-                <button className="bg-app-green-500 rounded-full px-3 py-1.5 font-sans font-bold text-white">
-                  {currentUser.email.charAt(0).toUpperCase()}
-                </button>
-                {isOpen ? <FaChevronUp /> : <FaChevronDown />}
-              </div>
-
-              <ul
-                tabIndex={0}
-                className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ${isOpen ? "block" : "hidden"}`}
-              >
-                <li>
-                  <a href="/profile">Profile</a>
-                </li>
-                <li>
-                  <a href="/settings">Settings</a>
-                </li>
-                <li onClick={handleLogout} className="cursor-pointer">
-                  Log out
-                </li>
-              </ul>
-            </div>
-
-            {/* {isEmployer && (
-
-              <Link to="/post-job">
-                <button className="bg-app-green-500 px-5 py-2.5 w-full rounded-md font-bold font-sans text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
-                  Post Job
-                </button>
-              </Link>
-
-            )} */}
-          </>
-        ) : (
-          <>
-            <li>
-              <Link to="/login">
-                <button className="bg-app-gray-0 border-2 border-app-green-500 px-5 py-1 w-full font-sans font-bold rounded-md text-app-green-500 hover:bg-opacity-90 transition-all flex items-center justify-center">
-                  Login
-                </button>
-              </Link>
-            </li>
-            {/* <li>
-              <Link to="/post-job">
-                <button className="bg-app-green-500 px-5 border-1s py-2 w-full rounded-md font-bold font-sans text-app-gray-0 hover:bg-opacity-90 transition-all flex items-center justify-center">
-                  Post Job
-                </button>
-              </Link>
-            </li> */}
-          </>
-        )}
+        <ProfileSection
+          isOpen={isOpen}
+          toggleDropdown={toggleDropdown}
+        />
       </div>
     </header>
   );

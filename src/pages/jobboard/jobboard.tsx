@@ -1,3 +1,12 @@
+import Filter from "./filters";
+import JobList from "./job-list";
+
 export default function JobBoard() {
-  return <h1 className="font-bold text-lg text-center">No Jobs yet</h1>;
+  return (
+    <div className="w-full p-4 flex flex-col justify-between  items-center">
+      <Filter />
+      <JobList />
+    </div>
+
+  );
 }

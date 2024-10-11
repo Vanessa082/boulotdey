@@ -8,13 +8,13 @@ interface SelectRoleModalProps {
 
 export function SelectRoleModal({ closeModal }: SelectRoleModalProps) {
   const [, setUser] = useState<Partial<User>>({
-    role: "EMPLOYEE",
+    roles: ["EMPLOYEE"],
   });
   const navigate = useNavigate();
 
-  const handleRoleSelection = (role: User["role"]) => {
-    setUser((prevUser) => ({ ...prevUser, role }));
-    navigate("/create-account", { state: { role } });
+  const handleRoleSelection = (roles: User["roles"]) => {
+    setUser((prevUser) => ({ ...prevUser, roles }));
+    navigate("/create-account", { state: { roles } });
     closeModal();
   };
 
@@ -26,7 +26,7 @@ export function SelectRoleModal({ closeModal }: SelectRoleModalProps) {
       <form
         onSubmit={(e) => e.preventDefault()}
         className="bg-app-gray-0 rounded-md p-5 text-center w-[80%] max-w-[400px]"
-        onClick={(e) => e.stopPropagation()} // Prevent closing the modal when clicking inside
+        onClick={(e) => e.stopPropagation()}
       >
         <span
           className="text-gray-600 absolute right-5 top-5 text-sm cursor-pointer"
@@ -37,15 +37,15 @@ export function SelectRoleModal({ closeModal }: SelectRoleModalProps) {
         <h2 className="text-lg mb-4">Who are You?</h2>
         <button
           type="button"
-          className="bg-app-green-500 text-app-gray-0 cursor-pointer px-3 py-2 mb-2 w-full"
-          onClick={() => handleRoleSelection("EMPLOYEE")}
+          className="bg-primary text-app-gray-0 cursor-pointer px-3 py-2 mb-2 w-full"
+          onClick={() => handleRoleSelection(["EMPLOYEE"])}
         >
           Employee
         </button>
         <button
           type="button"
-          className="bg-app-green-500 text-app-gray-0 cursor-pointer px-3 py-2 w-full"
-          onClick={() => handleRoleSelection("EMPLOYER")}
+          className="bg-primary text-app-gray-0 cursor-pointer px-3 py-2 w-full"
+          onClick={() => handleRoleSelection(["EMPLOYER"])}
         >
           Employer
         </button>

@@ -6,7 +6,7 @@ interface User {
   lastName?: string;
   phoneNumber?: string;
   email: string;
-  role: UserRoles;
+  roles: UserRoles[];
   password: string;
   confirmPassword: string;
   createdAt: string;

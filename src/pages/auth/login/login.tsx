@@ -49,12 +49,12 @@ export default function Login() {
       .then(({ data }) => {
         localStorage.save("token", data);
         toast.success("Successful login redirecting ...");
-        setRefetchCurrentUser((prev) => !prev);
         navigate("/job-board");
+        setRefetchCurrentUser((prev) => !prev);
       })
-      .catch(() => {
+      .catch((error) => {
         console.error("Invalid Email or Password");
-        toast.error("Invalid Email or Password");
+        toast.error("Invalid Email or Password", error);
       })
       .finally(() => {
         console.log("done");
