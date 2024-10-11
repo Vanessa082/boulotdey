@@ -9,9 +9,9 @@ export default {
     themes: [
       {
         mytheme: {
-          "primary": "#007B5E",
+          "primary": "#1E3A8A",
           "secondary": "#ffaa00",
-          "accent": "#18191c",
+          "accent": "#4b5065",
           "neutral": "#ff00ff",
           "base-100": "#ffffff",
           "info": "#F1F2F4",
@@ -38,10 +38,10 @@ export default {
             900: "#022009",
           },
           gray: {
-            0o0: "#FFFFFF", // Updated to correct the color code
+            0o0: "#FFFFFF", 
             50: "#F1F2F4",
             200: "#C8CCD1",
-            300: "#ADB2BA", // Corrected to have the proper format
+            300: "#ADB2BA", 
             500: "#767f8c",
             600: "#5E6670",
             900: "#18191C",

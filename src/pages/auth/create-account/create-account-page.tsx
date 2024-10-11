@@ -4,43 +4,51 @@ import { createAccount } from "../api/auth.requests";
 import { User } from "../../../interfaces/users";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
 import { toast } from "sonner";
-// import * as yup from "yup";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppContext } from "../../../providers/context/app-context/app-context";
 
 const localStorage = new CLIENT_STORAGE("local");
-// const schema = yup.object().shape({
-//   email: yup.string().email("Invalid email format").required("Email is required"),
-//   password: yup.string().min(8, "Password must be at least 8 characters").required("password is required"),
-//   confirmPassword: yup.string().oneOf([yup.ref('password')], "password must match").required("Please confirm password"),
-//   phoneNumber: yup.string().matches(/^6\d{8}$/, "Phone number must start with 6 and must be 9 digits").required("Phone Number is required")
-// })
 
 export default function CreateAccountPage() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  // const { register, handleSubmit, formState } = useForm({
-  //   resolver: yupResolver(schema),
-  // })
-
   const [user, setUser] = useState<Partial<User>>({
-    role: location.state?.role || "EMPLOYEE",
+    roles: location.state?.roles || ["EMPLOYEE"],
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { setRefetchCurrentUser } = useAppContext()
+  const [error, setError] = useState<string>("");
+
+  const validateForm = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(user.email || "")) {
+      setError("Please enter a valid email address.");
+      return false;
+    }
+    if (user.password !== user.confirmPassword) {
+      setError("Passwords do not match.");
+      return false;
+    }
+    setError("");
+    return true;
+  };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!validateForm()) {
+      return;
+    }
+
     createAccount(user)
       .then(({ data }) => {
         localStorage.save("token", data);
-        toast.success("Registration was successful ...");
         navigate("/job-board");
+        setRefetchCurrentUser((prev) => !prev);
+        toast.success("Registration was successful ...");
       })
-      .catch(() => {
-        console.error;
+      .catch((err) => {
+        console.error(err);
         toast.error("User already exists, please login");
       });
   };
@@ -50,10 +58,11 @@ export default function CreateAccountPage() {
       <h2 className="text-4xl font-bold mb-6">Create your account</h2>
       <p className="mb-4">
         Already have an account?{" "}
-        <Link to="/login" className="text-app-green-500 hover:underline">
+        <Link to="/login" className="text-primary hover:underline">
           Log in
         </Link>
       </p>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={onSubmit}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-medium">
@@ -97,7 +106,7 @@ export default function CreateAccountPage() {
         </div>
 
         <div className="relative">
-          <label htmlFor="password" className="block text-sm font-medium">
+          <label htmlFor="confirmPassword" className="block text-sm font-medium">
             Confirm Password
           </label>
           <input
@@ -122,14 +131,14 @@ export default function CreateAccountPage() {
 
         <div className="mb-4">
           <label
-            htmlFor="confirmPassword"
+            htmlFor="phoneNumber"
             className="block text-sm font-medium"
           >
             Phone Number
           </label>
           <input
-            type="phoneNumber"
-            id="phone Number"
+            type="phone"
+            id="phoneNumber"
             className="input border w-full py-2 px-4 rounded-md shadow-sm"
             placeholder="6 712 013 49"
             value={user?.phoneNumber || ""}
@@ -144,7 +153,7 @@ export default function CreateAccountPage() {
           <input type="checkbox" className="checkbox checkbox-primary mr-2" />
           <label className="ml-2 text-sm">
             I have read and agree with your{" "}
-            <a href="#" className="text-app-green-500 hover:underline">
+            <a href="#" className="text-primary hover:underline">
               Terms of Service
             </a>
           </label>
@@ -152,7 +161,7 @@ export default function CreateAccountPage() {
 
         <button
           type="submit"
-          className="btn btn-primary w-full py-3  text-app-gray-0 bg-text-app-green-500 hover:bg-app-green-800"
+          className="btn btn-primary w-full py-3  text-app-gray-0 bg-text-primary"
         >
           Create Account
         </button>
