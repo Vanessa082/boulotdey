@@ -12,16 +12,15 @@ export default function ProfileSection({ isOpen, toggleDropdown }: {
   toggleDropdown: () => void;
   isOpen: boolean;
 }) {
-  const { currentUser, currentUserLoading } = useAppContext();
+  const { currentUser, currentUserLoading, setRefetchCurrentUser } = useAppContext();
   const navigate = useNavigate();
 
   const localStorage = new CLIENT_STORAGE("local");
 
   const handleLogout = () => {
-    navigate("/");
     localStorage.remove("token");
-    console.log("Navigating to home");
-
+    navigate("/");
+    setRefetchCurrentUser((prev) => !prev);
   };
 
   if (currentUserLoading) {

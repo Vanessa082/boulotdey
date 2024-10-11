@@ -4,6 +4,7 @@ import { createAccount } from "../api/auth.requests";
 import { User } from "../../../interfaces/users";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
 import { toast } from "sonner";
+import { useAppContext } from "../../../providers/context/app-context/app-context";
 
 const localStorage = new CLIENT_STORAGE("local");
 
@@ -15,7 +16,8 @@ export default function CreateAccountPage() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState<string>(""); 
+  const { setRefetchCurrentUser } = useAppContext()
+  const [error, setError] = useState<string>("");
 
   const validateForm = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,7 +29,7 @@ export default function CreateAccountPage() {
       setError("Passwords do not match.");
       return false;
     }
-    setError(""); 
+    setError("");
     return true;
   };
 
@@ -35,13 +37,14 @@ export default function CreateAccountPage() {
     e.preventDefault();
 
     if (!validateForm()) {
-      return; 
+      return;
     }
 
     createAccount(user)
       .then(({ data }) => {
         localStorage.save("token", data);
         navigate("/job-board");
+        setRefetchCurrentUser((prev) => !prev);
         toast.success("Registration was successful ...");
       })
       .catch((err) => {
@@ -158,7 +161,7 @@ export default function CreateAccountPage() {
 
         <button
           type="submit"
-          className="btn btn-primary w-full py-3  text-app-gray-0 bg-text-primary hover:bg-app-green-800"
+          className="btn btn-primary w-full py-3  text-app-gray-0 bg-text-primary"
         >
           Create Account
         </button>
