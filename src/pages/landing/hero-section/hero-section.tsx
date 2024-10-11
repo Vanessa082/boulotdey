@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useAppContext } from "../../../providers/context/app-context/app-context";
 import { toast } from "sonner";
-import UpgradeRoleModal from "./upgrade-role-modal";
-import PostJobButton from "../../jobboard/post-job-btn";
+// import UpgradeRoleModal from "./upgrade-role-modal";
+// import PostJobButton from "../../jobboard/post-job-btn";
 
 export default function HeroSection() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [, setIsModalOpen] = useState(false);
   const { currentUser } = useAppContext();
 
   const userCanPostJob = useMemo(() => {
@@ -20,11 +20,11 @@ export default function HeroSection() {
     return { isEmployer };
   }, [currentUser]);
 
-  const handlePostJobClick = () => {
-    if (!currentUser) {
-      toast.error("You need to log in to post a job.");
-      return navigate("/login");
-    }
+  // const handlePostJobClick = () => {
+  //   if (!currentUser) {
+  //     toast.error("You need to log in to post a job.");
+  //     return navigate("/login");
+  //   }
 
     const { isEmployer } = userCanPostJob;
 
