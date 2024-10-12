@@ -19,8 +19,11 @@ export default function ProfileSection({ isOpen, toggleDropdown }: {
 
   const handleLogout = () => {
     localStorage.remove("token");
-    navigate("/");
     setRefetchCurrentUser((prev) => !prev);
+    if (!currentUserLoading) {
+      return <div className="skeleton h-8 w-52 rounded-sm"/>
+    }
+    navigate("/");
   };
 
   if (currentUserLoading) {

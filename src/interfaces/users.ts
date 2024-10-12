@@ -1,5 +1,5 @@
 type UserRoles = "EMPLOYEE" | "EMPLOYER" | "ADMIN";
-
+type UserVerificationStatus = "UNVERIFIED" | "PENDING" | "VERIFIED" | "REJECTED";
 interface User {
   _id: string;
   firstName: string;
@@ -9,8 +9,9 @@ interface User {
   roles: UserRoles[];
   password: string;
   confirmPassword: string;
+  verificationStatus: UserVerificationStatus;
   createdAt: string;
   updatedAt: string;
 }
 
-export type { User, UserRoles };
+export type { User, UserRoles, UserVerificationStatus };
