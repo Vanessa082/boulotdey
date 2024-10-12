@@ -1,40 +1,9 @@
-// import { useMemo, useState } from "react";
+
 import { Link } from "react-router-dom";
-// import { useAppContext } from "../../../providers/context/app-context/app-context";
-// import { toast } from "sonner";
-// import UpgradeRoleModal from "./upgrade-role-modal";
 import PostJobButton from "../../jobboard/post-job-btn";
 
 export default function HeroSection() {
-  // const navigate = useNavigate();
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const { currentUser } = useAppContext();
 
-  // const userCanPostJob = useMemo(() => {
-  //   if (!currentUser || !currentUser.roles) {
-  //     toast.message("No accounts please login");
-  //     return { isEmployer: false, hasMultipleRoles: false };
-  //   }
-
-  //   const isEmployer = currentUser.roles.includes("EMPLOYER");
-  //   return { isEmployer };
-  // }, [currentUser]);
-
-  // const handlePostJobClick = () => {
-  //   if (!currentUser) {
-  //     toast.error("You need to log in to post a job.");
-  //     return navigate("/login");
-  //   }
-
-  //   const { isEmployer } = userCanPostJob;
-
-  //   if (!isEmployer) {
-  //     setIsModalOpen(true);
-  //     return;
-  //   }
-
-  //   navigate("/post-job");
-  // };
   return (
     <div className="w-full min-h-[70vh] flex justify-center items-center px-6 bg-hero-banner bg-center bg-cover">
       <div className="w-full max-w-[1000px] flex flex-col lg:flex-row justify-between items-center bg-accent bg-opacity-70 text-white font-bold">

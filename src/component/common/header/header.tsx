@@ -31,6 +31,7 @@ export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { currentUser } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
+  const {currentUserLoading, setRefetchCurrentUser} = useAppContext()
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -46,12 +47,14 @@ export default function Header() {
   };
 
   const localStorage = new CLIENT_STORAGE("local");
-
   const handleLogout = () => {
     localStorage.remove("token");
+    setRefetchCurrentUser((prev) => !prev);
     navigate("/");
+    if (!currentUserLoading) {
+      return <div className="skeleton h-8 w-52 rounded-sm"/>
+    }
   };
-
   return (
     <header className="w-full px-4 py-2 flex items-center justify-between bg-app-gray-0  sticky top-0 z-50 transition-all duration-300 ease-in-out ">
       <div className="flex gap-20">
