@@ -22,11 +22,11 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
-export default function Login() {
+export default function LoginPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const navigate = useNavigate();
-  const {setRefetchCurrentUser} = useAppContext()
+  const { setRefetchCurrentUser } = useAppContext();
 
   const {
     control,

@@ -19,7 +19,7 @@ interface JobFormInputs {
   jobImage: FileList;
 }
 
-export default function PostJobForm() {
+export default function PostJobPage() {
   const {
     register,
     handleSubmit,
@@ -91,7 +91,9 @@ export default function PostJobForm() {
               className="input input-bordered w-full"
             />
             {errors.name && (
-              <span className="text-red-500 text-sm">Job Title is required</span>
+              <span className="text-red-500 text-sm">
+                Job Title is required
+              </span>
             )}
           </div>
 
@@ -178,7 +180,9 @@ export default function PostJobForm() {
             ))}
           </select>
           {errors.salaryRange && (
-            <span className="text-red-500 text-sm">Salary range is required</span>
+            <span className="text-red-500 text-sm">
+              Salary range is required
+            </span>
           )}
         </div>
 
@@ -194,9 +198,7 @@ export default function PostJobForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium">
-            Education / Trade
-          </label>
+          <label className="block text-sm font-medium">Education / Trade</label>
           <input
             type="text"
             placeholder="e.g., Secondary School, Trade Certification"
@@ -217,7 +219,10 @@ export default function PostJobForm() {
 
         <div>
           <label className="block text-sm font-medium">Status</label>
-          <select {...register("status")} className="select select-bordered w-full">
+          <select
+            {...register("status")}
+            className="select select-bordered w-full"
+          >
             <option value="open">Open</option>
             <option value="closed">Closed</option>
           </select>
@@ -225,7 +230,10 @@ export default function PostJobForm() {
 
         <div>
           <label className="block text-sm font-medium">Category</label>
-          <select {...register("category")} className="select select-bordered w-full">
+          <select
+            {...register("category")}
+            className="select select-bordered w-full"
+          >
             {categories.map((category) => (
               <option key={category} value={category}>
                 {category}
@@ -267,7 +275,11 @@ export default function PostJobForm() {
 
         <div>
           <label className="block text-sm font-medium">Job Image</label>
-          <input type="file" {...register("jobImage")} className="file-input file-input-ghost w-full max-w-xs" />
+          <input
+            type="file"
+            {...register("jobImage")}
+            className="file-input file-input-ghost w-full max-w-xs"
+          />
         </div>
 
         <button type="submit" className="btn btn-primary w-full">
@@ -276,4 +288,4 @@ export default function PostJobForm() {
       </form>
     </div>
   );
-};
+}

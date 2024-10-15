@@ -13,6 +13,4 @@ const updateUser = (user: Partial<User>) => {
   );
 };
 
-
-
-export {  updateUser};
+export { updateUser };

@@ -22,11 +22,7 @@ export default function Footer() {
         <p className="text-sm">Connecting job seekers and employers.</p>
         <nav className="hidden md:flex font-sans  font-bold items-center gap-10">
           {navItems.map(({ text, href }) => (
-            <Link
-              key={text}
-              to={href}
-              className=""
-            >
+            <Link key={text} to={href} className="">
               <span>{text}</span>
             </Link>
           ))}
@@ -37,9 +33,10 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-center border-t border-white pt-4">
-        <p className="text-sm">© {new Date().getFullYear()} BoulotDey. All rights reserved.</p>
+        <p className="text-sm">
+          © {new Date().getFullYear()} BoulotDey. All rights reserved.
+        </p>
       </div>
     </footer>
-
-  )
+  );
 }

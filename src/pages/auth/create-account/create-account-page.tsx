@@ -16,7 +16,7 @@ export default function CreateAccountPage() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { setRefetchCurrentUser } = useAppContext()
+  const { setRefetchCurrentUser } = useAppContext();
   const [error, setError] = useState<string>("");
 
   const validateForm = () => {
@@ -106,7 +106,10 @@ export default function CreateAccountPage() {
         </div>
 
         <div className="relative">
-          <label htmlFor="confirmPassword" className="block text-sm font-medium">
+          <label
+            htmlFor="confirmPassword"
+            className="block text-sm font-medium"
+          >
             Confirm Password
           </label>
           <input
@@ -130,10 +133,7 @@ export default function CreateAccountPage() {
         </div>
 
         <div className="mb-4">
-          <label
-            htmlFor="phoneNumber"
-            className="block text-sm font-medium"
-          >
+          <label htmlFor="phoneNumber" className="block text-sm font-medium">
             Phone Number
           </label>
           <input

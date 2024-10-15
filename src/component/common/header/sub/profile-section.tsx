@@ -1,18 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../../../providers/context/app-context/app-context";
-import {
-  
-  FaBell,
-  FaChevronDown,
-  FaChevronUp,
-} from "react-icons/fa";
+import { FaBell, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
 
-export default function ProfileSection({ isOpen, toggleDropdown }: {
+export default function ProfileSection({
+  isOpen,
+  toggleDropdown,
+}: {
   toggleDropdown: () => void;
   isOpen: boolean;
 }) {
-  const { currentUser, currentUserLoading, setRefetchCurrentUser } = useAppContext();
+  const { currentUser, currentUserLoading, setRefetchCurrentUser } =
+    useAppContext();
   const navigate = useNavigate();
 
   const localStorage = new CLIENT_STORAGE("local");
@@ -21,13 +20,13 @@ export default function ProfileSection({ isOpen, toggleDropdown }: {
     localStorage.remove("token");
     setRefetchCurrentUser((prev) => !prev);
     if (!currentUserLoading) {
-      return <div className="skeleton h-8 w-52 rounded-sm"/>
+      return <div className="skeleton h-8 w-52 rounded-sm" />;
     }
     navigate("/");
   };
 
   if (currentUserLoading) {
-    return <div className="skeleton h-8 w-52 rounded-sm"/>
+    return <div className="skeleton h-8 w-52 rounded-sm" />;
   }
 
   return currentUser ? (
