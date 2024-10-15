@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useAppContext } from "../../providers/context/app-context/app-context";
-import { UserRoles } from "../../interfaces/users";
-import { updateUser } from "../user/api/api.request";
-import { UpgradeRoleModal } from "../landing/hero-section/upgrade-role-modal";
+import { useAppContext } from "../../../providers/context/app-context/app-context";
+import { UserRoles } from "../../../interfaces/users";
+import { updateUser } from "../../user/api/api.request";
+import { UpgradeRoleModal } from "../../landing/hero-section/upgrade-role-modal";
+
 export default function PostJobButton() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,29 +49,34 @@ export default function PostJobButton() {
     } else if (userStatus.verificationStatus === "REJECTED") {
       setModalContent({
         title: "Verification Rejected",
-        description: "Your verification was rejected. Please re-verify your account.",
+        description:
+          "Your verification was rejected. Please re-verify your account.",
         actionLabel: "Get Verified",
-        onAction: () => navigate("/get-verified"),
+        onAction: () => navigate("/job-board/get-verified"),
       });
       setIsModalOpen(true);
     } else if (userStatus.verificationStatus === "PENDING") {
       setModalContent({
         title: "Verification Pending",
-        description: "Your verification is pending. Please wait while the administrators review it.",
+        description:
+          "Your verification is pending. Please wait while the administrators review it.",
         actionLabel: "OK",
         onAction: () => setIsModalOpen(false),
       });
       setIsModalOpen(true);
-    } else if (userStatus.isEmployer && userStatus.verificationStatus !== "VERIFIED") {
+    } else if (
+      userStatus.isEmployer &&
+      userStatus.verificationStatus !== "VERIFIED"
+    ) {
       setModalContent({
         title: "Get Verified",
         description: "You need to verify your account to post jobs.",
         actionLabel: "Get Verified",
-        onAction: () => navigate("/get-verified"),
+        onAction: () => navigate("/job-board/get-verified"),
       });
       setIsModalOpen(true);
     } else {
-      navigate("/post-job");
+      navigate("/job-board/post-job");
     }
   };
 
@@ -87,7 +93,7 @@ export default function PostJobButton() {
       updateUser(updatedUser)
         .then(() => {
           toast.success("Role upgraded successfully get verified!");
-          navigate("/get-verified"); 
+          navigate("/job-board/get-verified");
         })
         .catch((err) => {
           console.error(err);
@@ -112,7 +118,7 @@ export default function PostJobButton() {
         description={modalContent.description}
         primaryActionLabel={modalContent.actionLabel}
         onPrimaryAction={modalContent.onAction}
-        isOpen={isModalOpen} 
+        isOpen={isModalOpen}
       />
     </>
   );
