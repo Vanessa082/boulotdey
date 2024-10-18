@@ -1,5 +1,5 @@
 import { FaFilter } from "react-icons/fa";
-import PostJobButton from "../post-job/post-job-btn";
+import PostJobButton from "./buttons/post-job-btn";
 
 export default function Filter() {
   return (

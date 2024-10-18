@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import PostJobButton from "../../jobboard/post-job/post-job-btn";
+import PostJobButton from "../../jobboard/job-board-page/buttons/post-job-btn";
 
 export default function HeroSection() {
   return (

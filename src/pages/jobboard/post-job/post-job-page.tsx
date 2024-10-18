@@ -78,7 +78,7 @@ export default function PostJobPage() {
 
   return (
     <div className="p-4 max-w-lg mx-auto">
-      <h1 className="text-xl font-bold mb-4">Post a Job</h1>
+      <h1 className="text-xl font-bold mb-4">Post a kJob</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex flex-col lg:flex-row lg:gap-16">
           <div>
