@@ -1,12 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { TextLogo } from "../../ui/text-logo";
-import {
-  FaBars,
-  FaBell,
-  FaSearch,
-  FaTimes,
-} from "react-icons/fa";
+import { FaBars, FaBell, FaSearch, FaTimes } from "react-icons/fa";
 import { useAppContext } from "../../../providers/context/app-context/app-context";
 import SearchJob from "./search-job";
 import { CLIENT_STORAGE } from "@orashus/client-storage";
@@ -31,7 +26,7 @@ export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { currentUser } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
-  const {currentUserLoading, setRefetchCurrentUser} = useAppContext()
+  const { currentUserLoading, setRefetchCurrentUser } = useAppContext();
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -52,7 +47,7 @@ export default function Header() {
     setRefetchCurrentUser((prev) => !prev);
     navigate("/");
     if (!currentUserLoading) {
-      return <div className="skeleton h-8 w-52 rounded-sm"/>
+      return <div className="skeleton h-8 w-52 rounded-sm" />;
     }
   };
   return (
@@ -89,8 +84,11 @@ export default function Header() {
 
             <li>
               <div className="dropdown dropdown-end">
-
-                <button tabIndex={0} onClick={toggleDropdown} className="bg-primary cursor-pointer rounded-full px-3 py-1.5 font-sans font-bold text-white">
+                <button
+                  tabIndex={0}
+                  onClick={toggleDropdown}
+                  className="bg-primary cursor-pointer rounded-full px-3 py-1.5 font-sans font-bold text-white"
+                >
                   {currentUser.email.charAt(0).toUpperCase()}
                 </button>
 
@@ -110,7 +108,6 @@ export default function Header() {
                 </ul>
               </div>
             </li>
-
           </>
         ) : (
           <Link to="/login">
@@ -165,10 +162,7 @@ export default function Header() {
       <div className="hidden md:flex gap-5 items-center">
         <SearchJob />
 
-        <ProfileSection
-          isOpen={isOpen}
-          toggleDropdown={toggleDropdown}
-        />
+        <ProfileSection isOpen={isOpen} toggleDropdown={toggleDropdown} />
       </div>
     </header>
   );
