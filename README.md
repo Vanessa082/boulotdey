@@ -3,9 +3,11 @@
 **Boulootdey** is a Cameroonian job board designed to connect individuals with "petit métier" (small job) opportunities. The platform aims to simplify the job search and hiring process for small-scale professionals and employers, fostering economic growth and employment in local communities.
 
 ## Features
+- **Home Page**: Browse and apply for various "petit métier" jobs across different categories.
 
-- **Job Listings**: Browse and apply for various "petit métier" jobs across different categories.
-- **Employer Accounts**: Employers can post job opportunities and manage applications.
+- **Job Board**: Browse and apply for various "petit métier" jobs across different categories.
+  
+- **Employer  and Employee Account creation**: Employers can post job opportunities and manage applications.
 - **User Profiles**: Workers can create profiles showcasing their skills and experiences.
 - **Search and Filters**: Easily search for jobs based on location, job type, or skill.
 - **Responsive Design**: Optimized for both desktop and mobile devices to reach a broader audience.
