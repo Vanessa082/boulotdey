@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getOneJob } from "./api/endpoints";
 
 export default function JobDetailPage() {
-  const [JobDetails] = useState<Job | null>(null);
+  // const [JobDetails] = useState<Job | null>(null);
   const [language] = useState("en");
 
   const [job, setJob] = useState<Job | null>(null);
@@ -17,7 +17,7 @@ export default function JobDetailPage() {
     setJobLoading(true);
 
     getOneJob(params.job_id!)
-      .then(({ data, message, status }) => {
+      .then(({ data }) => {
         setJob(data);
       }).catch(console.warn)
       .finally(() => {

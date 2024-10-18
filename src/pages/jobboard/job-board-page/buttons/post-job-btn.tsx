@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useAppContext } from "../../../providers/context/app-context/app-context";
-import { UserRoles } from "../../../interfaces/users";
-import { updateUser } from "../../user/api/api.request";
-import { UpgradeRoleModal } from "../../landing/hero-section/upgrade-role-modal";
+import { useAppContext } from "../../../../providers/context/app-context/app-context";
+import { UserRoles } from "../../../../interfaces/users";
+import { updateUser } from "../../../user/api/api.request";
+import { UpgradeRoleModal } from "../../../landing/hero-section/upgrade-role-modal";
 
 export default function PostJobButton() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function PostJobButton() {
 
   const userStatus = useMemo(() => {
     if (!currentUser || !currentUser.roles) {
-      return { isLoggedIn: false, isEmployer: false, verificationStatus: "" };
+      return { isLoggedIn: false, isEmployer: false, /*verificationStatus: ""*/ };
     }
     const isEmployer = currentUser.roles.includes("EMPLOYER");
     return {
@@ -46,7 +46,7 @@ export default function PostJobButton() {
         onAction: handleUpgrade,
       });
       setIsModalOpen(true);
-    } else if (userStatus.verificationStatus === "REJECTED") {
+    } /*else if (userStatus.verificationStatus === "REJECTED") {
       setModalContent({
         title: "Verification Rejected",
         description:
@@ -75,7 +75,7 @@ export default function PostJobButton() {
         onAction: () => navigate("/job-board/get-verified"),
       });
       setIsModalOpen(true);
-    } else {
+    } */else {
       navigate("/job-board/post-job");
     }
   };
@@ -93,7 +93,7 @@ export default function PostJobButton() {
       updateUser(updatedUser)
         .then(() => {
           toast.success("Role upgraded successfully get verified!");
-          navigate("/job-board/get-verified");
+          // navigate("/job-board/get-verified");
         })
         .catch((err) => {
           console.error(err);
